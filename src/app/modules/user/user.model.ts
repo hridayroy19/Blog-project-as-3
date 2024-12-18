@@ -11,6 +11,8 @@ const userSchema = new Schema<IUser>({
     status:{type:String , enum:['in-progress' , 'blocked'],
         default:'in-progress'
     }
+  },{
+    timestamps:true
   });
 
  export const User = model<IUser>('User', userSchema);
