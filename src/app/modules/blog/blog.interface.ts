@@ -1,9 +1,8 @@
-import mongoose from "mongoose";
-
+import mongoose from 'mongoose';
 
 export interface IBlog {
-    title: string;
-    content: string;
-    author:mongoose.Schema.Types.ObjectId
-    isPublished: boolean;
-  }
+  title: string;
+  content: string;
+  author: mongoose.Schema.Types.ObjectId;
+  isPublished: boolean;
+}

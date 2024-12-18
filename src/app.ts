@@ -11,17 +11,14 @@ app.use(express.json());
 app.use(cors());
 
 // application routes
-app.use('/api/auth',authRouter);
+app.use('/api/auth', authRouter);
 app.use('/api', userRouter);
 app.use('/api', blogRouter);
-
-
-
 
 app.get('/', (req, res) => {
   res.send('Bloge Server is Running🏃🏿‍♂️‍➡️!');
 });
 
- app.use(notFound)
+app.use(notFound);
 
 export default app;

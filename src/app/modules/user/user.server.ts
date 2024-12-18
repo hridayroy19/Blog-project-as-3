@@ -1,11 +1,11 @@
-import { IUser } from "./user.interface"
-import { User } from "./user.model"
+import { IUser } from './user.interface';
+import { User } from './user.model';
 
-const creatUserIntoDB = async(payload:IUser)=>{
-    const result = await User.create(payload)
-    return result
-}
+const creatUserIntoDB = async (payload: IUser) => {
+  const result = await User.create(payload);
+  return result;
+};
 
-export const userServer ={
-    creatUserIntoDB
-}
+export const userServer = {
+  creatUserIntoDB,
+};
