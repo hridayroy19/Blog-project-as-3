@@ -19,11 +19,24 @@ const cretBlog = catchAsync(async(req, res)=>{
     })
 })
 
-//uupdate bloaf
+//get bloag
+const getBloag = catchAsync(async(req , res)=>{
+    const result = await blogServer.getBloagIntoDb(req.query)
+
+    sendResponse(res,
+        { success:true,
+        message:'Blog get successfully',
+        statusCode:httpStatus.CREATED,
+        data:result
+    })
+})
+
+
+//update bloag
 const updateBloag = catchAsync(async(req , res)=>{
      const id = req.params.id
      const body = req.body
-     console.log(body);
+    //  console.log(body);
      
      const resut = await blogServer.updateBlogInToDB(id,body);
      sendResponse(res,
@@ -45,10 +58,11 @@ const deletBloag = catchAsync(async(req , res)=>{
         
     })
     
-})
+})       
 
 export const blogController ={
     cretBlog,
+    getBloag,
     updateBloag,
     deletBloag
 }
