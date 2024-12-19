@@ -13,7 +13,7 @@ app.use(cors());
 
 // application routes
 app.use('/api/auth', authRouter);
-app.use('/api/admin',adminRoute);
+app.use('/api/admin', adminRoute);
 app.use('/api', userRouter);
 app.use('/api', blogRouter);
 

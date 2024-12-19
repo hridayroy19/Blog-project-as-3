@@ -1,11 +1,14 @@
-import { Router } from "express";
-import { AdminController } from "./admin.controller";
-import auth from "../../middlewares/auth";
+import { Router } from 'express';
+import { AdminController } from './admin.controller';
+import auth from '../../middlewares/auth';
 
+const adminRoute = Router();
 
-const adminRoute = Router()
+adminRoute.patch(
+  '/users/:userId/block',
+  auth('admin'),
+  AdminController.blogUpdateAdmin,
+);
+adminRoute.delete('/blogs/:id', auth('admin'), AdminController.blogDeleteAdmin);
 
-adminRoute.patch('/users/:userId/block')
-adminRoute.delete('/blogs/:id', auth('admin'),AdminController.blogDeleteAdmin)
-
-export default adminRoute
+export default adminRoute;
