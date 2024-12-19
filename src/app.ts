@@ -4,6 +4,7 @@ import userRouter from './app/modules/user/user.route';
 import blogRouter from './app/modules/blog/blog.route';
 import { notFound } from './app/middlewares/notFound';
 import authRouter from './app/modules/auth/auth.router';
+import adminRoute from './app/modules/admin/admin.route';
 const app: Application = express();
 
 //parsers
@@ -12,6 +13,7 @@ app.use(cors());
 
 // application routes
 app.use('/api/auth', authRouter);
+app.use('/api/admin',adminRoute);
 app.use('/api', userRouter);
 app.use('/api', blogRouter);
 

@@ -1,0 +1,11 @@
+import { Router } from "express";
+import { AdminController } from "./admin.controller";
+import auth from "../../middlewares/auth";
+
+
+const adminRoute = Router()
+
+adminRoute.patch('/users/:userId/block')
+adminRoute.delete('/blogs/:id', auth('admin'),AdminController.blogDeleteAdmin)
+
+export default adminRoute

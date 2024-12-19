@@ -10,7 +10,7 @@ const auth = ( requireRoles:string)=>{
             throw new Error("User not authorized");
         }
 
-      const decoded = jwt.verify(token, "secret") as JwtPayload
+      const decoded = jwt.verify(token, 'secrect') as JwtPayload
       console.log(decoded);
 
       const { role , email} = decoded;
