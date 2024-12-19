@@ -1,10 +1,15 @@
-import express, { Application } from 'express';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-unused-vars */
+
+import express, { Application, NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import userRouter from './app/modules/user/user.route';
 import blogRouter from './app/modules/blog/blog.route';
 import { notFound } from './app/middlewares/notFound';
 import authRouter from './app/modules/auth/auth.router';
 import adminRoute from './app/modules/admin/admin.route';
+import httpStatus from 'http-status';
 const app: Application = express();
 
 //parsers
@@ -20,6 +25,14 @@ app.use('/api', blogRouter);
 app.get('/', (req, res) => {
   res.send('Bloge Server is Running🏃🏿‍♂️‍➡️!');
 });
+
+
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+  console.log('error from app.ts', err)
+  res
+    .status(httpStatus.BAD_REQUEST)
+    .json({ success: false, message: err.message, error: err })
+})
 
 app.use(notFound);
 
