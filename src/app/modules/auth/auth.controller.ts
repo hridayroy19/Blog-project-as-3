@@ -23,7 +23,7 @@ const login = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.CREATED,
     message: 'Login successful',
-    token:result
+    token: result,
   });
 });
 

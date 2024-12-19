@@ -9,7 +9,9 @@ const registerIntoDb = async (payload: IBlog) => {
 };
 
 const loginIntoDb = async (payload: { email: string; password: string }) => {
-  const user = await User.findOne({ email: payload?.email }).select('+password');
+  const user = await User.findOne({ email: payload?.email }).select(
+    '+password',
+  );
 
   if (!user) {
     throw new Error('user is not found');
@@ -30,10 +32,10 @@ const loginIntoDb = async (payload: { email: string; password: string }) => {
   // create token and sent to the  client
   const jwtPayload = {
     email: user?.email,
-    role: user?.role
-  }
+    role: user?.role,
+  };
 
-  const token = jwt.sign(jwtPayload, "secrect", { expiresIn: "1d" })
+  const token = jwt.sign(jwtPayload, 'secrect', { expiresIn: '1d' });
   return token;
 };
 
