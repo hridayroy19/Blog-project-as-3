@@ -26,13 +26,12 @@ app.get('/', (req, res) => {
   res.send('Bloge Server is Running🏃🏿‍♂️‍➡️!');
 });
 
-
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-  console.log('error from app.ts', err)
+  console.log('error from app.ts', err);
   res
     .status(httpStatus.BAD_REQUEST)
-    .json({ success: false, message: err.message, error: err })
-})
+    .json({ success: false, message: err.message, error: err });
+});
 
 app.use(notFound);
 

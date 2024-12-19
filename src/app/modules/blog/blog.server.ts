@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { IBlog } from './blog.interface';
 import { Blog } from './blog.model';
 
@@ -6,34 +7,31 @@ const cretBlogIntoDB = async (payload: IBlog) => {
   const popoletResult = await result.populate('author');
   return popoletResult;
 };
-//getAll Bloag
+
+//get blog and seach filter sortby sortOrder
 const getBloagIntoDb = async (query: Record<string, unknown>) => {
-  const queryParams = { ...query };
-  console.log(queryParams);
+  const { search, sortBy, sortOrder, filter } = query;
 
-  const excludingImportant = [
-    'searchTerm',
-    'page',
-    'limit',
-    'sortOrder',
-    'sortBy',
-    'fields',
-  ];
+  const searchQuery: any = {};
 
-  excludingImportant.forEach((key) => delete queryParams[key]);
-  // console.log(queryParams);
+  if (search && typeof search === 'string') {
+    searchQuery.$or = [
+      { title: { $regex: search, $options: 'i' } },
+      { content: { $regex: search, $options: 'i' } },
+    ];
+  }
+  if (filter) {
+    searchQuery.author = filter;
+  }
 
-  const searchTerm = query?.searchTerm || '';
-  // console.log(searchTerm);
-  const searchableFields = ['title'];
+  const sortField: { [key: string]: 1 | -1 } = {};
+  if (sortBy && typeof sortBy === 'string' && typeof sortOrder === 'string') {
+    sortField[sortBy] = sortOrder.toLowerCase() === 'desc' ? -1 : 1;
+  }
 
-  const searchQuery = Blog.find({
-    $or: searchableFields.map((field) => ({
-      [field]: { $regex: searchTerm, $options: 'i' },
-    })),
-  });
-
-  const result = await searchQuery.find(queryParams);
+  const result = await Blog.find(searchQuery)
+    .populate('author')
+    .sort(sortField);
 
   return result;
 };
