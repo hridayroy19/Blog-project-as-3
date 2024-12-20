@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { IBlog } from './blog.interface';
 import { Blog } from './blog.model';
+import { User } from '../user/user.model';
+import { JwtPayload } from 'jsonwebtoken';
 
 const cretBlogIntoDB = async (payload: IBlog) => {
   const result = await Blog.create(payload);
@@ -38,29 +40,38 @@ const getBloagIntoDb = async (query: Record<string, unknown>) => {
 
 //update blog
 const updateBlogInToDB = async (id: string, payload: IBlog) => {
+  
   const result = await Blog.findByIdAndUpdate(id, payload, {
     new: true,
   }).populate('author');
   return result;
 };
-//delete bloag
 
-const deleteBlogIntoDb = async (id: string, userid: string) => {
+
+
+const deleteBlogIntoDb = async (id: string, user: JwtPayload) => {
+
+  const { email } = user;
+
+  const userData = await User.findOne({ email: email })
+  if (userData?.role === 'admin') {
+    const result = await Blog.findByIdAndDelete(id);
+    return result
+
+  }
+
   const blog = await Blog.findById(id);
-  // console.log(id , 'id');
-  if (!blog) {
-    throw new Error("Blog not found");
+
+  if (blog?.author.toString() === userData?._id.toString()) {
+    const result = await Blog.deleteOne({ author: userData?._id })
+    return result
+  }
+  else {
+    throw new Error('You dont Have parmision to deleted')
   }
 
-  if (blog.id?.author?.toString() !== userid) { 
-    throw new Error("You are not authorized to delete this blog");
-  }
-  // console.log(blog.author)
-  const result = await Blog.findByIdAndDelete(id);
-  return result;
+
 };
-
-
 
 export const blogServer = {
   cretBlogIntoDB,

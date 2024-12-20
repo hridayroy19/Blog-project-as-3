@@ -31,11 +31,14 @@ const getBloag = catchAsync(async (req, res) => {
 
 //update bloag
 const updateBloag = catchAsync(async (req, res) => {
-  const id = req.params.id;
-  const body = req.body;
-  //  console.log(body);
-
-  const resut = await blogServer.updateBlogInToDB(id, body);
+  // const id = req.params.id;
+  // const user = req.user;
+  // const payload = req.body;
+  const id = req.params.id; // Blog ID
+  const user = req.user?._id || req.user?.id; // User ID (ensure the user object has `_id` or `id`)
+  const payload = req.body
+  
+  const resut = await blogServer.updateBlogInToDB(id,payload,user);
   sendResponse(res, {
     success: true,
     message: 'Blog updated successfully',
@@ -47,7 +50,8 @@ const updateBloag = catchAsync(async (req, res) => {
 //delete bloag
 const deletBloag = catchAsync(async (req, res) => {
   const id = req.params.id;
-  const result = await blogServer.deleteBlogIntoDb(id);
+  const user = req.user;
+  const result = await blogServer.deleteBlogIntoDb(id,user);
   sendResponse(res, {
     success: true,
     message: 'Blog deleted successfully',
