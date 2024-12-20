@@ -38,7 +38,9 @@ const getBloagIntoDb = async (query: Record<string, unknown>) => {
 
 //update blog
 const updateBlogInToDB = async (id: string, payload: IBlog) => {
-  const result = await Blog.findByIdAndUpdate(id, payload, { new: true });
+  const result = await Blog.findByIdAndUpdate(id, payload, {
+    new: true,
+  }).populate('author');
   return result;
 };
 //delete bloag

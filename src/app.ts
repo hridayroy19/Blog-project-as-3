@@ -6,7 +6,6 @@ import express, { Application, NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import userRouter from './app/modules/user/user.route';
 import blogRouter from './app/modules/blog/blog.route';
-import { notFound } from './app/middlewares/notFound';
 import authRouter from './app/modules/auth/auth.router';
 import adminRoute from './app/modules/admin/admin.route';
 import httpStatus from 'http-status';
@@ -33,6 +32,12 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
     .json({ success: false, message: err.message, error: err });
 });
 
-app.use(notFound);
+app.use("*",(req:Request,  res:Response )=>{
+  res.status(400).json({
+   status:httpStatus.NOT_FOUND,
+   message:"Route Not Found"
+   
+  })
+ })
 
 export default app;

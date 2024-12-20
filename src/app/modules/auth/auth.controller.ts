@@ -21,7 +21,7 @@ const login = catchAsync(async (req, res) => {
   const result = await authServer.loginIntoDb(req.body);
 
   sendResponse(res, {
-    statusCode: httpStatus.CREATED,
+    statusCode: httpStatus.OK,
     message: 'Login successful',
     token: result,
   });
