@@ -3,7 +3,7 @@ import { IUser } from '../user/user.interface';
 import { User } from '../user/user.model';
 
 const blogUpdateAdminIntoDb = async (id: string, payload: IUser) => {
-  console.log(id, 'id nubm');
+  // console.log(id, 'id nubm');
 
   const result = await User.findByIdAndUpdate(id, payload, { new: true });
   return result;

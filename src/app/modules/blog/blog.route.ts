@@ -15,6 +15,10 @@ blogRouter.post(
 
 blogRouter.get('/blogs', blogController.getBloag);
 blogRouter.patch('/blogs/:id', auth(['user']), blogController.updateBloag);
-blogRouter.delete('/blogs/:id',auth(['user','admin']),blogController.deletBloag); 
+blogRouter.delete(
+  '/blogs/:id',
+  auth(['user', 'admin']),
+  blogController.deletBloag,
+);
 
 export default blogRouter;

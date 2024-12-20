@@ -40,37 +40,33 @@ const getBloagIntoDb = async (query: Record<string, unknown>) => {
 
 //update blog
 const updateBlogInToDB = async (id: string, payload: IBlog) => {
-  
   const result = await Blog.findByIdAndUpdate(id, payload, {
     new: true,
   }).populate('author');
   return result;
 };
 
-
-
 const deleteBlogIntoDb = async (id: string, user: JwtPayload) => {
-
   const { email } = user;
 
-  const userData = await User.findOne({ email: email })
+  // if (!user) {
+  //   throw new Error('User is not authenticated');
+  // }
+
+  const userData = await User.findOne({ email: email });
   if (userData?.role === 'admin') {
     const result = await Blog.findByIdAndDelete(id);
-    return result
-
+    return result;
   }
 
   const blog = await Blog.findById(id);
 
   if (blog?.author.toString() === userData?._id.toString()) {
-    const result = await Blog.deleteOne({ author: userData?._id })
-    return result
+    const result = await Blog.deleteOne({ author: userData?._id });
+    return result;
+  } else {
+    throw new Error('You dont Have parmision to deleted');
   }
-  else {
-    throw new Error('You dont Have parmision to deleted')
-  }
-
-
 };
 
 export const blogServer = {

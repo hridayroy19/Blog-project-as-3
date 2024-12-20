@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 /* eslint-disable no-unused-vars */
 
 import express, { Application, NextFunction, Request, Response } from 'express';
@@ -19,24 +19,22 @@ app.use(cors());
 // application routes
 app.use('/api/auth', authRouter);
 app.use('/api/admin', adminRoute);
-app.use('/api', userRouter);  
+app.use('/api', userRouter);
 app.use('/api', blogRouter);
 
 app.get('/', (req, res) => {
   res.send('Bloge Server is Running🏃🏿‍♂️‍➡️!');
 });
 
-
-//golbal Error handler 
+//golbal Error handler
 app.use(globalErrorHandler);
 
-//not found 
-app.use("*",(req:Request,  res:Response )=>{
+//not found
+app.use('*', (req: Request, res: Response) => {
   res.status(400).json({
-   status:httpStatus.NOT_FOUND,
-   message:"Route Not Found"
-   
-  })
- })
+    status: httpStatus.NOT_FOUND,
+    message: 'Route Not Found',
+  });
+});
 
 export default app;

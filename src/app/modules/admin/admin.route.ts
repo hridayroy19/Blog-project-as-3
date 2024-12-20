@@ -9,6 +9,10 @@ adminRoute.patch(
   auth(['admin']),
   AdminController.blogUpdateAdmin,
 );
-adminRoute.delete('/blogs/:id', auth(['admin']), AdminController.blogDeleteAdmin);
+adminRoute.delete(
+  '/blogs/:id',
+  auth(['admin']),
+  AdminController.blogDeleteAdmin,
+);
 
 export default adminRoute;

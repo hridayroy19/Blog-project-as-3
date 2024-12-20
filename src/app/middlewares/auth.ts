@@ -2,7 +2,6 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 import catchAsync from '../utils/catchAsync';
 import { User } from '../modules/user/user.model';
 
-
 const auth = (requireRoles: string[]) => {
   return catchAsync(async (req, res, next) => {
     const token = req.headers.authorization;
@@ -27,7 +26,7 @@ const auth = (requireRoles: string[]) => {
       throw new Error('this user blocked');
     }
     //  console.log(user.role);
-     
+
     // if (requireRoles !== role) {
     //   throw new Error('You are not Authorized');
     // }
