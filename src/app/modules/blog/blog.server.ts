@@ -10,7 +10,7 @@ const cretBlogIntoDB = async (payload: IBlog) => {
   return popoletResult;
 };
 
-//get blog and seach filter sortby sortOrder
+//get blog and seach filter sortby sortOrders
 const getBloagIntoDb = async (query: Record<string, unknown>) => {
   const { search, sortBy, sortOrder, filter } = query;
 
