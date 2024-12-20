@@ -35,7 +35,7 @@ const loginIntoDb = async (payload: { email: string; password: string }) => {
     role: user?.role,
   };
 
-  const token = jwt.sign(jwtPayload, 'secrect', { expiresIn: '1d' });
+  const token = jwt.sign(jwtPayload, 'secrect', { expiresIn: '20d' });
   return token;
 };
 

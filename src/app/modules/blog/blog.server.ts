@@ -44,10 +44,23 @@ const updateBlogInToDB = async (id: string, payload: IBlog) => {
   return result;
 };
 //delete bloag
-const deleteBlogIntoDb = async (id: string) => {
+
+const deleteBlogIntoDb = async (id: string, userid: string) => {
+  const blog = await Blog.findById(id);
+  // console.log(id , 'id');
+  if (!blog) {
+    throw new Error("Blog not found");
+  }
+
+  if (blog.id?.author?.toString() !== userid) { 
+    throw new Error("You are not authorized to delete this blog");
+  }
+  // console.log(blog.author)
   const result = await Blog.findByIdAndDelete(id);
   return result;
 };
+
+
 
 export const blogServer = {
   cretBlogIntoDB,
