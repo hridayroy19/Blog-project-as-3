@@ -1,7 +1,7 @@
-is projcet Blog here user cratea order Bloag;
+is projcet Blog here user cratea  Bloag  ;
 
 projcet Name: Blog Projcet
-Live Url :
+Live Url Main : https://blog-project-psi-six.vercel.app/
 Deployment: Vercel
 
 Technology used :
@@ -27,17 +27,19 @@ Can update and delete their own blogs.
 API Endpoints : Authentication>
 
 Method Endpoint Description
-POST /api/auth/register user register
-post /api/auth/login Login
+POST   /api/auth/register    user register
+post   /api/auth/login   Login
 
 API Endpoints : Blog Managemen>
-Post /api/blogs Create Blog Authorization: Bearer <token>
-PATCH /api/blogs/:id Update Blog
-DELETE /api/blogs/:id Delete Blog
-GET /api/blogs Query Parameters
+Post     /api/blogs       Create Blog Authorization: Bearer <token>
+PATCH    /api/blogs/:id    Update Blog
+DELETE   /api/blogs/:id    Delete Blog
+GET       /api/blogs     Query Parameters
 
 API Endpoints : Admin Actions >
-PATCH /api/admin/users/:userId/block Block User Authorization: Bearer <admin_token>
-DELETE /api/admin/blogs/:id Delete Blog Authorization: Bearer <admin_token>
+PATCH   /api/admin/users/:userId/block     Block User Authorization: Bearer <admin_token>
+DELETE   /api/admin/blogs/:id              Delete Blog Authorization: Bearer <admin_token>
 
-1. Error Handling
+ Error Handling
+
+Zod Validation Error (ZOD_ERROR) Not Found Error (NOT_FOUND_ERROR) Validation Error (VALIDATION_ERROR): General validation errors Authentication Error (AUTH_ERROR): Issues related to failed authentication Authorization Error (AUTHORIZATION_ERROR): When the user lacks the necessary permissions to access a resource. Internal Server Error (INTERNAL_SERVER_ERROR) Unhandled errors or unexpected server issues.
