@@ -4,7 +4,7 @@
 
 import express, { Application, NextFunction, Request, Response } from 'express';
 import cors from 'cors';
-import userRouter from './app/modules/user/user.route';
+// import userRouter from './app/modules/user/user.route';
 import blogRouter from './app/modules/blog/blog.route';
 import authRouter from './app/modules/auth/auth.router';
 import adminRoute from './app/modules/admin/admin.route';
@@ -19,7 +19,7 @@ app.use(cors());
 // application routes
 app.use('/api/auth', authRouter);
 app.use('/api/admin', adminRoute);
-app.use('/api', userRouter);
+// app.use('/api', userRouter);
 app.use('/api', blogRouter);
 
 app.get('/', (req, res) => {

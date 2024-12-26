@@ -34,8 +34,8 @@ const getBloag = catchAsync(async (req, res) => {
 const updateBloag = catchAsync(async (req, res) => {
   const id = req.params.id;
   const payload = req.body;
-
-  const resut = await blogServer.updateBlogInToDB(id, payload);
+  const user = req.user as JwtPayload;
+  const resut = await blogServer.updateBlogInToDB(id, payload ,user);
   sendResponse(res, {
     success: true,
     message: 'Blog updated successfully',
